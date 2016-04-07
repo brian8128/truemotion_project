@@ -26,8 +26,10 @@ class TestProblems(unittest.TestCase):
         sc = ps.SparkContext('local[4]')
         actual = clean_data(sc, 'train.txt').take(1)[0]
 
+
         # Matches test/data/train.txt
         desired = (0, np.array([[1.635533, 0.024848, 0.432087],
                                 [1.547694, 0.008754, 0.319101]]))
 
-        self.assertEqual(actual, desired)
+        self.assertEqual(actual[0], desired[0])
+        self.assertTrue(np.array_equal(actual[1], desired[1]))
